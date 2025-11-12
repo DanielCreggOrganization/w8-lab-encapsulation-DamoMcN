@@ -5,7 +5,6 @@
 2. [Getters and Setters](#2-getters-and-setters)
 3. [Data Validation](#3-data-validation)
 4. [Constructors and Initialization](#4-constructors-and-initialization)
-5. [Business Logic Methods](#5-business-logic-methods)
 
 ## Lab Setup
 1. Create a package called `ie.atu.encapsulation`
@@ -215,141 +214,13 @@ public class Grade {
 }
 ```
 
-## 4. Constructors and Initialisation
-
-### Learning Objective
-Learn how to properly initialize encapsulated objects using constructors.
-
-### Explanation
-Constructors ensure that objects are created in a valid state by properly initialising all necessary fields. A well-designed constructor validates its parameters and establishes class invariants, preventing the creation of invalid objects. The constructor represents the first line of defense in maintaining encapsulation, as it controls how objects are created and initialized.
-
-### Example
-```java
-public class Car {
-    private String make;
-    private String model;
-    private int year;
-    
-    // Constructor with validation
-    public Car(String make, String model, int year) {
-        if (make == null || make.trim().isEmpty()) {
-            throw new IllegalArgumentException("Make cannot be empty");
-        }
-        if (model == null || model.trim().isEmpty()) {
-            throw new IllegalArgumentException("Model cannot be empty");
-        }
-        if (year < 1886) { // First automobile was invented in 1886
-            throw new IllegalArgumentException("Invalid year");
-        }
-        
-        this.make = make;
-        this.model = model;
-        this.year = year;
-    }
-    
-    // Getters
-    public String getMake() { return make; }
-    public String getModel() { return model; }
-    public int getYear() { return year; }
-}
-```
-
-### Visual Representation
-```mermaid
-sequenceDiagram
-    Client->>+Car: new Car("Toyota", "Camry", 2024)
-    Car->>Car: Validate make
-    Car->>Car: Validate model
-    Car->>Car: Validate year
-    Car->>Car: Initialize fields
-    Car-->>-Client: New Car object
-```
-
-### DIY Exercise: Book Catalog
-Create a `Book` class that:
-- Has private fields for ISBN, title, and author
-- Has a constructor that validates all fields
-- Provides only getter methods (immutable object)
-- Throws exceptions for invalid input
-
-## 5. Business Logic Methods
-
-### Learning Objective
-Learn how to implement methods that operate on encapsulated data while maintaining object consistency.
-
-### Explanation
-Business logic methods perform operations using the object's private data while maintaining encapsulation and data integrity. These methods encapsulate not just data but also the behavior and rules that apply to that data. By keeping business logic within the class, we ensure that all operations on the data follow the same rules and maintain consistency.
-
-### Example
-```java
-public class Employee {
-    private String name;
-    private double salary;
-    private int yearsOfService;
-    
-    // Constructor
-    public Employee(String name, double salary) {
-        this.name = name;
-        this.salary = salary;
-        this.yearsOfService = 0;
-    }
-    
-    // Business logic methods
-    public void giveRaise(double percentage) {
-        if (percentage <= 0) {
-            throw new IllegalArgumentException("Percentage must be positive");
-        }
-        salary += salary * (percentage / 100);
-    }
-    
-    public void completeServiceYear() {
-        yearsOfService++;
-        if (yearsOfService % 5 == 0) {
-            giveRaise(5); // 5% raise every 5 years
-        }
-    }
-    
-    public double calculateBonus() {
-        return salary * (yearsOfService / 10.0);
-    }
-    
-    // Getters
-    public String getName() { return name; }
-    public double getSalary() { return salary; }
-    public int getYearsOfService() { return yearsOfService; }
-}
-```
-
-### Visual Representation
-```mermaid
-classDiagram
-    class Employee {
-        -String name
-        -double salary
-        -int yearsOfService
-        +giveRaise(percentage)
-        +completeServiceYear()
-        +calculateBonus()
-    }
-```
-
-### DIY Exercise: Bank Account Manager
-Create an `Account` class that:
-- Stores account balance and transaction history
-- Implements deposit and withdrawal methods
-- Calculates interest based on balance
-- Provides account statement generation
-- Tracks and limits daily transactions
-
-
-
 ## Summary
 This lab covered the essential concepts of encapsulation in Java:
 1. Basic data hiding using private fields
 2. Controlled access through getters and setters
 3. Data validation for maintaining integrity
 4. Proper initialization with constructors
-5. Business logic methods for operations
+
 
 ## Further Reading
 - Java Documentation: [Access Control](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html)
