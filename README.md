@@ -244,19 +244,19 @@ public class Student {
     // Constructor with validation logic
     public Student(int age) {
         if (age < 16 || age > 100) {
-            System.out.println("Invalid age: must be between 16 and 100");
-            return 0; // Must return valid int or 
+            System.out.println("Invalid age input: must be between 16 and 100 inclusive. Age set to 16.");
+            return 16; // If invalid input is recieved we must return a valid age keep the object state valid.
         }
-        this.age = age;
+        return age;
     }
 
     // Setter with validation logic
     public void setAge(int age) {
         if (age < 16 || age > 100) {
-            System.out.println("Invalid age: must be between 16 and 100");
-            return 0;
+            System.out.println("Invalid age input: must be between 16 and 100 inclusive. Age set to 16.");
+            return 16; // If invalid input is recieved we must return a valid age keep the object state valid.
         }
-        this.age = age;
+        return age;
     }
     
     public int getAge() {
